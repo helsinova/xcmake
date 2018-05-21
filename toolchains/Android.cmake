@@ -83,7 +83,7 @@ if (HAVE_ANDROID_OS)
 				WARNING
 				"Non-Android tool-chain used for building Android: ${ANDROID_TARGET_TEST}"
 			)
-		endif (NOT ANDROID_TARGET_TEST STREQUAL "")
+		endif (ANDROID_TARGET_TEST STREQUAL "")
 
 		# Append --sysroot option. Needed for this CMAKE_SYSTEM_NAME
 		if (NOT SYSROOT STREQUAL "")
