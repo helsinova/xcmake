@@ -8,6 +8,11 @@ set(XTOOL_PREFIX
 	CACHE STRING
 	"Cross compiler PREFIX in the format <CPUarchitecture>-<system>-<ABI>")
 
+#set(SYSROOT
+#	${CMAKE_SYSROOT}
+#	CACHE STRING
+#	"System path (--system=)")
+
 set(X_PREFIX ${XTOOL_PREFIX}-)
 
 find_program(GCC_EXECUTABLE ${XTOOL_PREFIX}-gcc)
@@ -85,22 +90,13 @@ if (HAVE_ANDROID_OS)
 			)
 		endif (ANDROID_TARGET_TEST STREQUAL "")
 
-		# Append --sysroot option. Needed for this CMAKE_SYSTEM_NAME
-		if (NOT SYSROOT STREQUAL "")
-			set(CMAKE_EXTRA_C_FLAGS "${CMAKE_EXTRA_C_FLAGS} --sysroot=${CMAKE_SYSROOT}")
-		endif (NOT SYSROOT STREQUAL "")
+		## Append --sysroot option. Needed for this CMAKE_SYSTEM_NAME
+		#if (NOT SYSROOT STREQUAL "")
+		#		set(CMAKE_EXTRA_C_FLAGS "${CMAKE_EXTRA_C_FLAGS} --sysroot=${CMAKE_SYSROOT}")
+		#endif (NOT SYSROOT STREQUAL "")
 
 		set	(HAVE_TOOLFILE_SET_EXTRA_C_FLAGS 1)
 	endif (NOT HAVE_TOOLFILE_SET_EXTRA_C_FLAGS)
-
-	# Convenience version of the above.
-	# WARNING: Could be overwritten by user-configuration which may not be what you
-	# want. See CMAKE_EXTRA_C_FLAGS for a better way of handling C_FLAGS
-	if (NOT HAVE_TOOLFILE_SET_C_FLAGS)
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_EXTRA_C_FLAGS}")
-
-		set	(HAVE_TOOLFILE_SET_C_FLAGS 1)
-	endif (NOT HAVE_TOOLFILE_SET_C_FLAGS)
 
 endif (HAVE_ANDROID_OS)
 
