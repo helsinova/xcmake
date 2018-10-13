@@ -11,7 +11,7 @@ but that is not strictly required.
 
 ```bash
 cd $YOUR_PROJECT
-git submodule add cmake https://github.com/helsinova/xcmake.git
+git submodule add https://github.com/helsinova/xcmake.git cmake
 ```
 
 Read on in [x-build](x-build.md) for how use the tool-chain files, including
